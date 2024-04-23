@@ -1,7 +1,7 @@
 
 const pool = require('../databases/connPool');
 
-const conn = pool.pool;
+const conn = pool;
 
 function update(user){
 

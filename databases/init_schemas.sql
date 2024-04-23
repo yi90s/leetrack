@@ -1,5 +1,5 @@
-CREATE DATABASE leetrackDB;
-USE leetrackDB;
+CREATE DATABASE leetrack;
+USE leetrack;
 
 CREATE TABLE Difficulties(
     difficulty_id TINYINT PRIMARY KEY AUTO_INCREMENT,
