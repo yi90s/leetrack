@@ -11,12 +11,27 @@
     "body-parser": "^1.20.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^16.4.5",
     "express": "~4.16.1",
+    "express-winston": "^4.2.0",
     "graphql": "^16.8.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "jsonwebtoken": "^9.0.2",
+    "knex": "^3.1.0",
+    "module-alias": "^2.2.3",
     "morgan": "~1.9.1",
-    "mysql2": "^3.9.6"
+    "mysql2": "^3.9.6",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.1.1",
+    "eslint": "^9.1.1",
+    "globals": "^15.0.0"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@routes": "./src/routes",
+    "@lib": "./src/lib"
   }
 }

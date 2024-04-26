@@ -1,0 +1,141 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Leetrack API",
+      "description": "This is a sample API documentation.",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/api"
+      }
+    ],
+    "paths": {
+      "/auth/login": {
+        "post": {
+          "summary": "User authentication",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User authenticated successfully",
+              "content":{
+                "application/json":{
+                    "schema":{
+                        "type":"object",
+                        "properties": {
+                            "message":{
+                                "type": "string",
+                                "example": "Authentication successful"
+                            },
+                            "token":{
+                                "type": "string",
+                                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+                            }
+                        }
+                    }
+                }
+              }
+            },
+            "401":{
+                "description": "Incorrect username or password",
+                "content": {
+                    "application/json":{
+                        "schema":{
+                            "type": "object",
+                            "properties": {
+                                "errors":{
+                                    "type": "string",
+                                    "example": "Incorrect username or password"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+          }
+        }
+      },
+      "/auth/register":{
+        "post":{
+            "summary": "User Registration",
+            "requestBody":{
+                "required": true,
+                "content":{
+                    "application/x-www-form-urlencoded":{
+                        "schema":{
+                            "type": "object",
+                            "properties": {
+                                "username":{
+                                    "type": "string"
+                                },
+                                "password":{
+                                    "type": "string"
+                                },
+                                "email":{
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200":{
+                    "description": "User registration successful",
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "message":{
+                                        "type": "string",
+                                        "example": "The user has been created"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401":{
+                    "description": "Invalid registration request",
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "errors":{
+                                        "type": "string",
+                                        "example": "Invalid username, password, or email"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }  
+        }
+      },
+      "/problems/attempted":{
+        
+      },
+      "/"
+    }
+  }
+  

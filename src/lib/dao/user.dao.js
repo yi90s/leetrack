@@ -1,7 +1,8 @@
 
-const pool = require('../databases/connPool');
+const pool = require('@lib/database/connection');
 
 const conn = pool;
+const knex = pool.knex;
 
 function update(user){
 
@@ -15,8 +16,8 @@ async function add(user){
 }
 
 async function getByUsername(username){
-    const [rows, fields] = await conn.execute('SELECT * FROM Users WHERE username = ?', [username]);
-    return rows[0];
+    const rows = knex.select().from('Users').where('username', username);
+    return rows;
 }
 
 async function getByEmail(email){

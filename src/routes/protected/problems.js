@@ -1,7 +1,8 @@
 const express = require('express')
 const axios = require('axios');
 const router = express.Router();
-const topicDao = require('../../daos/topic.dao')
+const topicDao = require('@lib/dao/topic.dao')
+const logger = require('@lib/logger/logger');
 
 router.post('/reload', async function (req, res, next) {
 
@@ -33,32 +34,32 @@ router.post('/reload', async function (req, res, next) {
    
     const response = await axios.post('https://leetcode.com/graphql/', { query, variables });
     
-    const topics = new Set();
+    var topics = new Set();
     const problems = response.data.data.problemsetQuestionList.questions;
     
-    problems.forEach(problem => {
-        problem.topicTags.forEach(topicTag =>{
-            topics.add(topicTag.name);
-        })
-    });
-
     try{
-        console.log(topics);
-        topics.forEach(async function (val, val, set){
-            await topicDao.add(val);
-        })
-    }catch (err){
+        problems.forEach(problem => {
+            problem.topicTags.forEach(topicTag =>{
+                topics.add(topicTag.name);
+            })
+        });
+        
+        topics = Array.from(topics);
+
+        for(var i = 0; i < topics.length; i++){
+            await topicDao.add(topics[i]);
+        }
+
+        res.send(topics);
+
+    }catch(err){
+        logger.error(err.message, err.stack);
+        res.status(500).json({error: "an unexpected error ocurred"})
     }
 
-
-    // topicDao.addAll(Array.from(topics));
-
-    res.send(topics.toString());
+    
 })
 
-function load(leetcodeCookie) {
-
-}
 
 
 

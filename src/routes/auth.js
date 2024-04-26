@@ -1,22 +1,24 @@
 var express = require('express');
 var router = express.Router();
-const userDao = require('../daos/user.dao');
-const crypt = require('../crypto/crypt');
-const jwt = require('../crypto/jwtAuth')
+const userDao = require('@lib/dao/user.dao');
+const crypt = require('@lib/auth/crypt');
+const jwt = require('@lib/auth/jwt')
 
 router.post('/login', validateLogin, async function(req, res, next){
 	const {username, password} = req.body;
 
 	try{
-		const user = await userDao.getByUsername(username);
+		const user = (await userDao.getByUsername(username))[0];
+
 		if(!user){
 			return res.send("the user does not exist");
 		}
 
 		const pass = await crypt.compare(password, user.password);
+		
 		if(!pass){
 			return res.send("the password is incorrect");
-		}		
+		}
 
         const jwtToken = jwt.sign(username);
 		
