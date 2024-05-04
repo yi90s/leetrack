@@ -24,9 +24,7 @@ function jwt(){
             const payload = jsonwebtoken.verify(token, process.env.JWT_SECRET);
             
             // attach user in req object for later use
-            req.user = {
-                'username': payload.username
-            }
+            req.user = payload.user;
 
         }catch(verifyErr){
             return res.status(401).send(verifyErr.message);

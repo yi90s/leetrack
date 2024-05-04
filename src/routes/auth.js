@@ -4,7 +4,7 @@ const userDao = require('@lib/dao/user.dao');
 const crypt = require('@lib/auth/crypt');
 const jwt = require('@lib/auth/jwt')
 
-router.post('/login', validateLogin, async function(req, res, next){
+router.post('/token', validateLogin, async function(req, res, next){
 	const {username, password} = req.body;
 
 	try{
@@ -20,7 +20,7 @@ router.post('/login', validateLogin, async function(req, res, next){
 			return res.send("the password is incorrect");
 		}
 
-        const jwtToken = jwt.sign(username);
+        const jwtToken = jwt.sign(user);
 		
 		res.json({
             'jwtToken': jwtToken

@@ -9,4 +9,14 @@ async function getByUserId(userId){
     return await knex.select().from('Attempts').where('user_id', userId);
 }
 
-module.exports = {getById, getByUserId}
+async function add(attempt){
+    const result = await knex('Attempts').insert({
+        user_id : attempt.user_id,
+        problem_id : attempt.problem_id,
+        timestmp: attempt.timestmp
+    });
+
+    return result[0];
+}
+
+module.exports = {getById, getByUserId, add}
