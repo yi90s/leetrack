@@ -1,7 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button'
 
-function RegistrationForm(){
+function RegistrationForm() {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -9,7 +13,7 @@ function RegistrationForm(){
     });
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setFormData(prevState => ({
             ...prevState,
             [name]: value
@@ -18,49 +22,51 @@ function RegistrationForm(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
+        try {
             const response = await axios.post("http://172.22.118.166:4000/auth/register", formData);
             console.log(response.data);
-        }catch(error){
+        } catch (error) {
             console.error('Error:', error);
         }
     }
 
-    return(
-        <form onSubmit={handleSubmit}>
-        <h2>Register</h2>
-        <div>
-            <label>Username</label>
-            <input 
-                type="text" 
-                name="username" 
-                value={formData.username} 
-                onChange={handleChange} 
-                required 
-            />
-        </div>
-        <div>
-            <label>Email</label>
-            <input 
-                type="email" 
-                name="email" 
-                value={formData.email} 
-                onChange={handleChange} 
-                required 
-            />
-        </div>
-        <div>
-            <label>Password</label>
-            <input 
-                type="password" 
-                name="password" 
-                value={formData.password} 
-                onChange={handleChange} 
-                required 
-            />
-        </div>
-        <button type="submit">Register</button>
-    </form>
+    return (
+        <Box maxWidth='500px' margin='auto'>
+            <form onSubmit={handleSubmit}>
+                <TextField
+                    label="Username"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    fullWidth
+                    required
+                    margin="normal"
+                />
+                <TextField
+                    label="Email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    fullWidth
+                    required
+                    margin="normal"
+                />
+                <TextField
+                    label="Password"
+                    name="password"
+                    //   type='password'
+                    value={formData.password}
+                    onChange={handleChange}
+                    fullWidth
+                    required
+                    margin="normal"
+                />
+                <Button type="submit" variant="contained" color="primary">
+                    Submit
+                </Button>
+            </form>
+        </Box>
+
     )
 }
 

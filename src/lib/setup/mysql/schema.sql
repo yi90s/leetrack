@@ -20,7 +20,7 @@ CREATE TABLE Users(
 
 CREATE TABLE Problems(
     problem_id SMALLINT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
+    name VARCHAR(50) UNIQUE NOT NULL,
     difficulty_id TINYINT,
     url VARCHAR(255),
     FOREIGN KEY (difficulty_id) REFERENCES Difficulties(difficulty_id)
