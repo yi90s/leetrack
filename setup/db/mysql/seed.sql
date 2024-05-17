@@ -1,4 +1,4 @@
-USE leetrack
+USE leetrack;
 INSERT Users SET user_id = 1, email_address='test@gmail.com', username='test', password='$2a$10$y/RBVUpeEYKHdLNhbudqEOJecPi.JpK1JXc2ZotUNfxBnVMQ116Ty';
 
 -- difficulties
@@ -11,7 +11,7 @@ insert Topics set topic_id = 1, name = 'Array';
 insert Topics set topic_id = 2, name = 'Hash Table';
 
 -- problems
-insert Problems set problem_id = 1, name = 'Two Sum', difficulty_id = 1;
+insert Problems set problem_id = 1, title = 'Two Sum', title_slug='two-sum' difficulty_id = 1;
 
 -- problemTopics
 insert ProblemTopics set problem_id = 1, topic_id = 1;
